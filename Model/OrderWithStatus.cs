@@ -32,6 +32,4 @@ public class OrderWithStatus
             StatusText = statusText
         };
     }
-
-
 }

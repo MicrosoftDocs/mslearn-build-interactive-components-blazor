@@ -9,7 +9,7 @@ public static class OrderApiExtensions
         builder.MapGet("specials", async (PizzaStoreContext db) =>
         {
             var specials = await db.Specials.ToListAsync();
-            return specials.OrderByDescending(s => s.BasePrice);
+            return Results.Ok(specials.OrderByDescending(s => s.BasePrice));
         });
 
         var orders = builder.MapGroup("orders");
@@ -34,7 +34,7 @@ public static class OrderApiExtensions
             // new specials and toppings
             foreach (var pizza in order.Pizzas)
             {
-                pizza.SpecialId = pizza.Special.Id;
+                pizza.SpecialId = pizza.Special?.Id ?? 0;
                 pizza.Special = null!;
             }
 

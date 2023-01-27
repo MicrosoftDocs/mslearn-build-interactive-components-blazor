@@ -13,7 +13,7 @@ public class Address
     public string Line1 { get; set; } = default!;
 
     [MaxLength(100)]
-    public string Line2 { get; set; } = default!;
+    public string? Line2 { get; set; }
 
     [Required, MaxLength(50)]
     public string City { get; set; } = default!;
