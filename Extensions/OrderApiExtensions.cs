@@ -4,18 +4,25 @@ namespace BlazingPizza.Extensions;
 
 public static class OrderApiExtensions
 {
-    public static IEndpointRouteBuilder MapOrderApi(this IEndpointRouteBuilder builder)
+    public static IEndpointRouteBuilder MapPizzaApi(this IEndpointRouteBuilder builder)
     {
+        builder.MapGet("specials", async (PizzaStoreContext db) =>
+        {
+            var specials = await db.Specials.ToListAsync();
+            return specials.OrderByDescending(s => s.BasePrice);
+        });
+
         var orders = builder.MapGroup("orders");
         orders.MapGet("", async (PizzaStoreContext db) =>
         {
             var orders = await db.Orders
+                .Include(o => o.DeliveryAddress)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
                 .OrderByDescending(o => o.CreatedTime)
                 .ToListAsync();
 
-            return orders.Select(o => OrderWithStatus.FromOrder(o)).ToList();
+            return Results.Ok(orders.Select(o => OrderWithStatus.FromOrder(o)).ToList());
         });
 
         orders.MapPost("", async (PizzaStoreContext db, Order order) =>
@@ -41,6 +48,7 @@ public static class OrderApiExtensions
         {
             var order = await db.Orders
                 .Where(o => o.OrderId == orderId)
+                .Include(o => o.DeliveryAddress)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
                 .SingleOrDefaultAsync();

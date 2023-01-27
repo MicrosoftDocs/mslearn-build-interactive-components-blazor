@@ -2,7 +2,7 @@
 
 public class PizzaTopping
 {
-    public Topping Topping { get; set; }
+    public Topping Topping { get; set; } = default!;
 
     public int ToppingId { get; set; }
     

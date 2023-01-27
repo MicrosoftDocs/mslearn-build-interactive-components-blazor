@@ -38,13 +38,6 @@ app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-app.MapGet("specials",
-    async (PizzaStoreContext db) =>
-    {
-        var pizzas = await db.Specials.ToListAsync();
-        return pizzas.OrderByDescending(s => s.BasePrice);
-    });
-
-app.MapOrderApi();
+app.MapPizzaApi();
 
 app.Run();
