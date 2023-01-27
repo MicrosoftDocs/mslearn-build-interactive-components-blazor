@@ -35,7 +35,7 @@ public static class OrderApiExtensions
             foreach (var pizza in order.Pizzas)
             {
                 pizza.SpecialId = pizza.Special.Id;
-                pizza.Special = null;
+                pizza.Special = null!;
             }
 
             db.Orders.Attach(order);

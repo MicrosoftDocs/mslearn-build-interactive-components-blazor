@@ -16,7 +16,7 @@ internal static class SeedData
             new()
             {
                 Id = 2,
-                Name = "The Baconator",
+                Name = "The Baconatorizor",
                 Description = "It has EVERY kind of bacon",
                 BasePrice = 11.99m,
                 ImageUrl = "img/pizzas/bacon.jpg",
@@ -47,11 +47,11 @@ internal static class SeedData
             },
             new()
             {
-                    Id = 6,
-                    Name = "The Brit",
-                    Description = "When in London...",
-                    BasePrice = 10.25m,
-                    ImageUrl = "img/pizzas/brit.jpg",
+                Id = 6,
+                Name = "The Brit",
+                Description = "When in London...",
+                BasePrice = 10.25m,
+                ImageUrl = "img/pizzas/brit.jpg",
             },
             new()
             {
