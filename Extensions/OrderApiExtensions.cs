@@ -1,38 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BlazingPizza
+namespace BlazingPizza.Extensions;
+
+public static class OrderApiExtensions
 {
-    [Route("orders")]
-    [ApiController]
-
-    public class OrdersController : Controller
+    public static IEndpointRouteBuilder MapOrderApi(this IEndpointRouteBuilder builder)
     {
-        private readonly PizzaStoreContext _db;
-
-        public OrdersController(PizzaStoreContext db)
+        var orders = builder.MapGroup("orders");
+        orders.MapGet("", async (PizzaStoreContext db) =>
         {
-            _db = db;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<List<OrderWithStatus>>> GetOrders()
-        {
-            var orders = await _db.Orders
+            var orders = await db.Orders
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
                 .OrderByDescending(o => o.CreatedTime)
                 .ToListAsync();
 
             return orders.Select(o => OrderWithStatus.FromOrder(o)).ToList();
-        }
+        });
 
-        [HttpPost]
-        public async Task<ActionResult<int>> PlaceOrder(Order order)
+        orders.MapPost("", async (PizzaStoreContext db, Order order) =>
         {
             order.CreatedTime = DateTime.Now;
 
@@ -45,27 +31,28 @@ namespace BlazingPizza
                 pizza.Special = null;
             }
 
-            _db.Orders.Attach(order);
-            await _db.SaveChangesAsync();
+            db.Orders.Attach(order);
+            await db.SaveChangesAsync();
 
             return order.OrderId;
-        }
+        });
 
-        [HttpGet("{orderId}")]
-        public async Task<ActionResult<OrderWithStatus>> GetOrderWithStatus(int orderId)
+        orders.MapGet("{orderId}", async (PizzaStoreContext db, int orderId) =>
         {
-            var order = await _db.Orders
+            var order = await db.Orders
                 .Where(o => o.OrderId == orderId)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Special)
                 .Include(o => o.Pizzas).ThenInclude(p => p.Toppings).ThenInclude(t => t.Topping)
                 .SingleOrDefaultAsync();
-        
-            if (order == null)
+
+            if (order is null)
             {
-                return NotFound();
+                return Results.NotFound();
             }
-        
-            return OrderWithStatus.FromOrder(order);
-        }
+
+            return Results.Ok(OrderWithStatus.FromOrder(order));
+        });
+
+        return builder;
     }
 }

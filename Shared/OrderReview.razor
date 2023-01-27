@@ -17,5 +17,6 @@
 </p>
 
 @code {
-    [Parameter] public Order Order { get; set; }
+    [Parameter, EditorRequired]
+    public required Order Order { get; set; }
 }

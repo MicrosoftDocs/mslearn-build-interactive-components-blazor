@@ -1,4 +1,4 @@
-﻿@import url('font/quicksand.css');
+@import url('font/quicksand.css');
 
 body, html {
     height: 100%;
@@ -241,9 +241,9 @@ form {
     padding: 0 1.5rem;
 }
 
-.order-total.hidden {
-    transform: translate3d(0, 4rem, 0);
-}
+    .order-total.hidden {
+        transform: translate3d(0, 4rem, 0);
+    }
 
     .order-total .total-price {
         font-weight: 700;
@@ -411,27 +411,27 @@ form {
     padding: 0 1rem;
 }
 
-    .dialog-body > div {
-        display: flex;
-        margin-top: 1rem;
-        align-items: center;
-    }
+.dialog-body > div {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+}
 
-    .dialog-body label {
-        text-align: right;
-        width: 200px;
-        margin: 0 1.5rem;
-    }
+.dialog-body label {
+    text-align: right;
+    width: 200px;
+    margin: 0 1.5rem;
+}
 
-    .dialog-body input, .dialog-body select {
-        flex-grow: 1;
-        width: unset;
-    }
+.dialog-body input, .dialog-body select {
+    flex-grow: 1;
+    width: unset;
+}
 
-    .dialog-body .size-label {
-        min-width: 110px;
-        text-align: right;
-    }
+.dialog-body .size-label {
+    min-width: 110px;
+    text-align: right;
+}
 
 .dialog .toppings {
     text-align: center;
@@ -454,9 +454,9 @@ form {
     font-size: 0.8rem;
 }
 
-.dialog .topping-price::before {
-    content: '£';
-}
+    .dialog .topping-price::before {
+        content: '£';
+    }
 
 .delete-topping {
     background: none;
@@ -466,9 +466,9 @@ form {
     cursor: pointer;
 }
 
-.delete-topping:hover {
-    color: yellow;
-}
+    .delete-topping:hover {
+        color: yellow;
+    }
 
 .form-message {
     padding: 0.5rem;
@@ -654,6 +654,7 @@ input[type=range] {
 .checkout-cols {
     display: flex;
 }
+
     .checkout-cols h4 {
         margin-bottom: 1.5rem;
     }

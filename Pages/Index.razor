@@ -1,33 +1,32 @@
-@page "/"
+﻿@page "/"
 @layout MainLayout
 @inject HttpClient HttpClient
 @inject NavigationManager NavigationManager
 @inject OrderState OrderState
 
 <div class="main">
-  <ul class="pizza-cards">
-    @if (specials != null)
-    {
-      @foreach (var special in specials)
-      {
-          <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
-          <div class="pizza-info">
-          <span class="title">@special.Name</span>
-          @special.Description
-          <span class="price">@special.GetFormattedBasePrice()</span>
-          </div>
-        </li>
-      }
-    }
-  </ul>
+    <ul class="pizza-cards">
+        @if (specials != null)
+        {
+            @foreach (var special in specials)
+            {
+                <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))" style="background-image: url('@special.ImageUrl')">
+                    <div class="pizza-info">
+                        <span class="title">@special.Name</span>
+                        @special.Description
+                        <span class="price">@special.GetFormattedBasePrice()</span>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
 </div>
 
 @if (OrderState.ShowingConfigureDialog)
 {
-    <ConfigurePizzaDialog
-      Pizza="OrderState.ConfiguringPizza"
-      OnCancel="OrderState.CancelConfigurePizzaDialog"
-      OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
+    <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
+                      OnCancel="OrderState.CancelConfigurePizzaDialog"
+                      OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
 }
 
 <div class="sidebar">
@@ -38,13 +37,13 @@
 
             @foreach (var configuredPizza in order.Pizzas)
             {
-              <div class="cart-item">
-                  <a @onclick="@(() => OrderState.RemoveConfiguredPizza(configuredPizza))" class="delete-item">x</a>
-                  <div class="title">@(configuredPizza.Size)" @configuredPizza.Special.Name</div>
-                  <div class="item-price">
-                      @configuredPizza.GetFormattedTotalPrice()
-                  </div>
-              </div>
+                <div class="cart-item">
+                    <a @onclick="@(() => OrderState.RemoveConfiguredPizza(configuredPizza))" class="delete-item">x</a>
+                    <div class="title">@(configuredPizza.Size)" @configuredPizza.Special.Name</div>
+                    <div class="item-price">
+                        @configuredPizza.GetFormattedTotalPrice()
+                    </div>
+                </div>
             }
         </div>
     }
@@ -63,12 +62,12 @@
 </div>
 
 @code {
-  List<PizzaSpecial> specials = new List<PizzaSpecial>();
-  Order order => OrderState.Order;
+    List<PizzaSpecial> specials = new();
+    Order order => OrderState.Order;
 
-  protected override async Task OnInitializedAsync()
-  {
-      specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + "specials");
-  }
+    protected override async Task OnInitializedAsync()
+    {
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(
+            NavigationManager.BaseUri + "specials");
+    }
 }
-		
