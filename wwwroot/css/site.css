@@ -322,11 +322,10 @@ form {
     position: absolute;
     top: 0;
     right: 0;
-    content: 'X';
     cursor: pointer;
     color: #fff2cc;
     width: 2rem;
-    height: 2rem;
+    height: 1.6rem;
     text-align: center;
 }
 

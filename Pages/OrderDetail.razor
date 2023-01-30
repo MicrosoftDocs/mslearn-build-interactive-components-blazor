@@ -15,9 +15,6 @@
                 <h2>
                     <text>Loading...</text>
                 </h2>
-                <p class="ml-auto mb-0">
-                    ...
-                </p>
             </div>
         </div>
     }
@@ -39,7 +36,7 @@
                         <p>
                             <strong>
                                 @(pizza.Size)"
-                                @pizza.Special.Name
+                                @pizza.Special!.Name
                                 (£@pizza.GetFormattedTotalPrice())
                             </strong>
                         </p>

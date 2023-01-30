@@ -1,5 +1,5 @@
 ﻿@page
-@model             BlazingPizza.Pages.ErrorModel
+@model BlazingPizza.Pages.ErrorModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +19,11 @@
             <h2 class="text-danger">An error occurred while processing your request.</h2>
 
             @if (Model.ShowRequestId)
-        {
-            <p>
+            {
+                <p>
                     <strong>Request ID:</strong> <code>@Model.RequestId</code>
                 </p>
-        }
+            }
 
             <h3>Development Mode</h3>
             <p>
