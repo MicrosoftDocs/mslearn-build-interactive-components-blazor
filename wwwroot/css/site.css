@@ -211,8 +211,12 @@ form {
     display: flex;
     flex-direction: column;
     color: white;
-    height: 87vh;
+    height: 100vh;
 }
+
+    .sidebar.with-total {
+        height: calc(86vh + 4rem);
+    }
 
 .order-contents {
     overflow-y: auto;

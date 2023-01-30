@@ -25,11 +25,11 @@
 @if (OrderState.ShowingConfigureDialog)
 {
     <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza"
-                      OnCancel="OrderState.CancelConfigurePizzaDialog"
-                      OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
+        OnCancel="OrderState.CancelConfigurePizzaDialog"
+        OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
 }
 
-<div class="sidebar">
+<div class="sidebar @(order.Pizzas.Any() ? "with-total" : "")">
     @if (order.Pizzas.Any())
     {
         <div class="order-contents">
