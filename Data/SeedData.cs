@@ -47,14 +47,6 @@ internal static class SeedData
             },
             new()
             {
-                Id = 6,
-                Name = "The Brit",
-                Description = "When in London...",
-                BasePrice = 10.25m,
-                ImageUrl = "img/pizzas/brit.jpg",
-            },
-            new()
-            {
                 Id = 7,
                 Name = "Veggie Delight",
                 Description = "It's like salad, but on a pizza",
