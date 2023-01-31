@@ -318,6 +318,23 @@ form {
         margin-right: 0.3rem;
     }
 
+.delete-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: #fff2cc;
+    width: 2rem;
+    height: 1.6rem;
+    text-align: center;
+}
+
+    .delete-item:hover {
+        text-decoration: none;
+        color: #fff2cc;
+        background-color: rgba(255,255,255,0.1);
+    }
+
 .close.text-danger {
     font-size: 2.5rem;
 }
