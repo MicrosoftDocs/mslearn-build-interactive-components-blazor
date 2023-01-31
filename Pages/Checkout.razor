@@ -34,7 +34,7 @@
     Order Order => OrderState.Order;
 
     bool isError = true;
-    private EditContext? editContext;
+    EditContext? editContext;
 
     protected override void OnInitialized()
     {
@@ -52,7 +52,7 @@
         NavigationManager.NavigateTo($"myorders/{newOrderId}");
     }
 
-    private void HandleFieldChanged(object? sender, FieldChangedEventArgs e)
+    void HandleFieldChanged(object? sender, FieldChangedEventArgs e)
     {
         isError = editContext?.Validate() is false;
         StateHasChanged();
