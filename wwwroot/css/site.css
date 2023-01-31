@@ -215,7 +215,7 @@ form {
 }
 
     .sidebar.with-total {
-        height: calc(86vh + 4rem);
+        height: calc(100% - 5rem);
     }
 
 .order-contents {
@@ -318,22 +318,9 @@ form {
         margin-right: 0.3rem;
     }
 
-.delete-item {
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    color: #fff2cc;
-    width: 2rem;
-    height: 1.6rem;
-    text-align: center;
+.close.text-danger {
+    font-size: 2.5rem;
 }
-
-    .delete-item:hover {
-        text-decoration: none;
-        color: #fff2cc;
-        background-color: rgba(255,255,255,0.1);
-    }
 
 .configured-pizza-item {
     display: flex;
@@ -526,7 +513,7 @@ form {
 .track-order {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    height: 100%;
+    height: calc(100% - 5rem);
     display: flex;
     flex-direction: column;
 }
