@@ -1,4 +1,4 @@
-﻿@import url('font/quicksand.css');
+@import url('font/quicksand.css');
 
 body, html {
     height: 100%;
@@ -46,7 +46,7 @@ form {
 
 .content {
     display: flex;
-    height: 100%;
+    height: 100vh;
     z-index: 1;
     background-color: white;
 }
@@ -211,7 +211,12 @@ form {
     display: flex;
     flex-direction: column;
     color: white;
+    height: 100vh;
 }
+
+    .sidebar.with-total {
+        height: calc(100% - 5rem);
+    }
 
 .order-contents {
     overflow-y: auto;
@@ -241,9 +246,9 @@ form {
     padding: 0 1.5rem;
 }
 
-.order-total.hidden {
-    transform: translate3d(0, 4rem, 0);
-}
+    .order-total.hidden {
+        transform: translate3d(0, 4rem, 0);
+    }
 
     .order-total .total-price {
         font-weight: 700;
@@ -317,11 +322,10 @@ form {
     position: absolute;
     top: 0;
     right: 0;
-    content: 'X';
     cursor: pointer;
     color: #fff2cc;
     width: 2rem;
-    height: 2rem;
+    height: 1.6rem;
     text-align: center;
 }
 
@@ -331,9 +335,35 @@ form {
         background-color: rgba(255,255,255,0.1);
     }
 
+.close.text-danger {
+    font-size: 2.5rem;
+}
+
 .configured-pizza-item {
     display: flex;
     flex-direction: row;
+}
+
+.dialog-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2000;
+    display: flex;
+    animation: dialog-container-entry 0.2s;
+}
+
+@keyframes dialog-container-entry {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .dialog-container {
@@ -411,27 +441,27 @@ form {
     padding: 0 1rem;
 }
 
-    .dialog-body > div {
-        display: flex;
-        margin-top: 1rem;
-        align-items: center;
-    }
+.dialog-body > div {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+}
 
-    .dialog-body label {
-        text-align: right;
-        width: 200px;
-        margin: 0 1.5rem;
-    }
+.dialog-body label {
+    text-align: right;
+    width: 200px;
+    margin: 0 1.5rem;
+}
 
-    .dialog-body input, .dialog-body select {
-        flex-grow: 1;
-        width: unset;
-    }
+.dialog-body input, .dialog-body select {
+    flex-grow: 1;
+    width: unset;
+}
 
-    .dialog-body .size-label {
-        min-width: 110px;
-        text-align: right;
-    }
+.dialog-body .size-label {
+    min-width: 110px;
+    text-align: right;
+}
 
 .dialog .toppings {
     text-align: center;
@@ -454,9 +484,9 @@ form {
     font-size: 0.8rem;
 }
 
-.dialog .topping-price::before {
-    content: '£';
-}
+    .dialog .topping-price::before {
+        content: '£';
+    }
 
 .delete-topping {
     background: none;
@@ -466,9 +496,9 @@ form {
     cursor: pointer;
 }
 
-.delete-topping:hover {
-    color: yellow;
-}
+    .delete-topping:hover {
+        color: yellow;
+    }
 
 .form-message {
     padding: 0.5rem;
@@ -500,7 +530,7 @@ form {
 .track-order {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    height: 100%;
+    height: calc(100% - 5rem);
     display: flex;
     flex-direction: column;
 }
@@ -654,6 +684,7 @@ input[type=range] {
 .checkout-cols {
     display: flex;
 }
+
     .checkout-cols h4 {
         margin-bottom: 1.5rem;
     }

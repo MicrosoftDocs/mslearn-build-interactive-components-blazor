@@ -3,7 +3,7 @@
 @inject NavigationManager NavigationManager
 
 <div class="main">
-    @if (ordersWithStatus == null)
+    @if (ordersWithStatus is null)
     {
         <text>Loading...</text>
     }
@@ -43,10 +43,9 @@
 </div>
 
 @code {
-    List<OrderWithStatus> ordersWithStatus = new List<OrderWithStatus>();
+    List<OrderWithStatus>? ordersWithStatus = new();
 
-    protected override async Task OnParametersSetAsync()
-    {
-      ordersWithStatus = await HttpClient.GetFromJsonAsync<List<OrderWithStatus>>(NavigationManager.BaseUri + "orders");
-    }
+    protected override async Task OnParametersSetAsync() =>
+        ordersWithStatus = await HttpClient.GetFromJsonAsync<List<OrderWithStatus>>(
+            $"{NavigationManager.BaseUri}orders");
 }
