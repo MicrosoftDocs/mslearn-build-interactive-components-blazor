@@ -11,14 +11,14 @@
         @foreach (var special in specials ?? new())
 
         {
-                <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))"
-                    style="background-image: url('@special.ImageUrl')">
-                    <div class="pizza-info">
-                        <span class="title">@special.Name</span>
+            <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))"
+                style="background-image: url('@special.ImageUrl')">
+                <div class="pizza-info">
+                    <span class="title">@special.Name</span>
                     @special.Description
-                        <span class="price">@special.GetFormattedBasePrice()</span>
-                    </div>
-                </li>
+                    <span class="price">@special.GetFormattedBasePrice()</span>
+                </div>
+            </li>
         }
     </ul>
 </div>
@@ -26,37 +26,37 @@
 @if (OrderState.ShowingConfigureDialog)
 
 {
-        <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza" OnCancel="OrderState.CancelConfigurePizzaDialog"
-            OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
- }   
+    <ConfigurePizzaDialog Pizza="OrderState.ConfiguringPizza" OnCancel="OrderState.CancelConfigurePizzaDialog"
+        OnConfirm="OrderState.ConfirmConfigurePizzaDialog" />
+}
 
 <div class="sidebar @(order.Pizzas.Any() ? "with-total" : "")">
     @if (order.Pizzas.Any())
     {
 
         <div class="order-contents">
-                <h2>Your order</h2>
-    
+            <h2>Your order</h2>
+
             @foreach (var configuredPizza in order.Pizzas)
             {
 
                 <div class="cart-item">
-                            <button type="button" class="close text-danger" aria-label="Close"
-                            @onclick="@(async () => await RemovePizzaConfirmation(configuredPizza))">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <div class="title">@(configuredPizza.Size)" @configuredPizza.Special!.Name</div>
+                    <button type="button" class="close text-danger" aria-label="Close"
+                    @onclick="@(async () => await RemovePizzaConfirmation(configuredPizza))">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="title">@(configuredPizza.Size)" @configuredPizza.Special!.Name</div>
                     <div class="item-price">
-                                @configuredPizza.GetFormattedTotalPrice()
-                            </div>
+                        @configuredPizza.GetFormattedTotalPrice()
+                    </div>
                 </div>
-                }
-     
-   </div>
+            }
+
+        </div>
     }
 
     else
-       { 
+    {
         <div class="empty-cart">Choose a pizza<br>to get started</div>
     }
 
@@ -84,12 +84,23 @@
     $"{NavigationManager.BaseUri}specials");
 
     async Task RemovePizzaConfirmation(Pizza removePizza)
-{
-    if (await JavaScript.InvokeAsync<bool>(
-        "confirm",
-        $"""Do you want to remove the "{removePizza.Special!.Name}" from your order?"""))
     {
-        OrderState.RemoveConfiguredPizza(removePizza);
+        var messageParams = new
+        {
+            title = "Remove Pizza?",
+            text = $"""Do you want to remove the "{removePizza.Special!.Name}" from your order?""",
+            icon = "warning",
+            buttons = new
+            {
+                abort = new { text = "No, leave it in my order", value = false },
+                confirm = new { text = "Yes, remove pizza", value = true }
+            },
+            dangerMode = true
+        };
+
+        if (await JavaScript.InvokeAsync<bool>("swal", messageParams))
+        {
+            OrderState.RemoveConfiguredPizza(removePizza);
+        }
     }
-}
 }
