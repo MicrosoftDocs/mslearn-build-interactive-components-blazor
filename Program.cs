@@ -1,6 +1,4 @@
-using BlazingPizza;
-using BlazingPizza.Extensions;
-using Microsoft.EntityFrameworkCore;
+using BlazingPizza.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

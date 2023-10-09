@@ -1,11 +1,8 @@
-using Microsoft.EntityFrameworkCore;
+namespace BlazingPizza.Data;
 
-namespace BlazingPizza;
-
-public sealed class PizzaStoreContext : DbContext
+public sealed class PizzaStoreContext(DbContextOptions options)
+    : DbContext(options)
 {
-    public PizzaStoreContext(DbContextOptions options) : base(options)
-    {
     }
 
     public DbSet<Order> Orders => Set<Order>();

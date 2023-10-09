@@ -13,17 +13,23 @@ public class Pizza
 
     public int OrderId { get; set; }
 
-    public required PizzaSpecial Special { get; set; }
+    public PizzaSpecial? Special { get; set; }
 
     public int SpecialId { get; set; }
 
     public int Size { get; set; }
 
-    public List<PizzaTopping> Toppings { get; set; } = [];
+    public List<PizzaTopping> Toppings { get; set; } = default!;
 
-    public decimal GetBasePrice() => ((decimal)Size / (decimal)DefaultSize) * Special?.BasePrice ?? 1;
+    public decimal GetBasePrice() =>
+        (decimal)Size / DefaultSize * Special?.BasePrice ?? 1;
 
     public decimal GetTotalPrice() => GetBasePrice();
 
-    public string GetFormattedTotalPrice() => GetTotalPrice().ToString("0.00");
+    public string GetFormattedTotalPrice() =>
+        GetTotalPrice().ToString("0.00");
 }
+
+[JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Serialization)]
+[JsonSerializable(typeof(Pizza))]
+public partial class PizzaContext : JsonSerializerContext { }
