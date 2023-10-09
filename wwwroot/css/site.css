@@ -211,7 +211,7 @@ form {
     display: flex;
     flex-direction: column;
     color: white;
-    height: 100vh;
+    height: calc(100vh - 5rem /* top-bar height */);
 }
 
     .sidebar.with-total {
