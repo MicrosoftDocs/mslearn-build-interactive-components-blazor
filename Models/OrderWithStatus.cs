@@ -1,4 +1,4 @@
-﻿namespace BlazingPizza;
+﻿namespace BlazingPizza.Models;
 
 public class OrderWithStatus
 {

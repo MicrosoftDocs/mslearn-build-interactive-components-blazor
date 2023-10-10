@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BlazingPizza;
+﻿namespace BlazingPizza.Models;
 
 public class Address
 {

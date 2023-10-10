@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BlazingPizza.Extensions;
+﻿namespace BlazingPizza.Extensions;
 
 public static class OrderApiExtensions
 {
