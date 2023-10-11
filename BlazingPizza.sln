@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.33318.248
+VisualStudioVersion = 17.9.34203.221
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingPizza", "BlazingPizza.csproj", "{CCF84F8C-44DF-4608-8407-A2C082CD6C8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingPizza", "BlazingPizza.csproj", "{5462F535-DEE9-4EA9-B4C0-A760284335FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CCF84F8C-44DF-4608-8407-A2C082CD6C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCF84F8C-44DF-4608-8407-A2C082CD6C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCF84F8C-44DF-4608-8407-A2C082CD6C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCF84F8C-44DF-4608-8407-A2C082CD6C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5462F535-DEE9-4EA9-B4C0-A760284335FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5462F535-DEE9-4EA9-B4C0-A760284335FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5462F535-DEE9-4EA9-B4C0-A760284335FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5462F535-DEE9-4EA9-B4C0-A760284335FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {ADFCACA6-D4F5-4631-B94E-EA5951F5936B}
+		SolutionGuid = {8B7E3E79-7A82-417B-9A75-DD4E06B45479}
 	EndGlobalSection
 EndGlobal

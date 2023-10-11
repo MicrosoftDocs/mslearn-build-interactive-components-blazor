@@ -1,19 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BlazingPizza.Extensions;
+﻿namespace BlazingPizza.Extensions;
 
 public static class OrderApiExtensions
 {
     public static IEndpointRouteBuilder MapPizzaApi(this IEndpointRouteBuilder builder)
     {
-        builder.MapGet("specials", async (PizzaStoreContext db) =>
+        builder.MapGet("specials", static async (PizzaStoreContext db) =>
         {
             var specials = await db.Specials.ToListAsync();
-            return Results.Ok(specials.OrderByDescending(s => s.BasePrice));
+            return TypedResults.Ok(specials.OrderByDescending(s => s.BasePrice));
         });
 
         var orders = builder.MapGroup("orders");
-        orders.MapGet("", async (PizzaStoreContext db) =>
+        orders.MapGet("", static async (PizzaStoreContext db) =>
         {
             var orders = await db.Orders
                 .Include(o => o.DeliveryAddress)
@@ -22,10 +20,10 @@ public static class OrderApiExtensions
                 .OrderByDescending(o => o.CreatedTime)
                 .ToListAsync();
 
-            return Results.Ok(orders.Select(o => OrderWithStatus.FromOrder(o)).ToList());
+            return TypedResults.Ok(orders.Select(o => OrderWithStatus.FromOrder(o)).ToList());
         });
 
-        orders.MapPost("", async (PizzaStoreContext db, Order order) =>
+        orders.MapPost("", static async (PizzaStoreContext db, Order order) =>
         {
             order.CreatedTime = DateTime.Now;
 
@@ -44,7 +42,7 @@ public static class OrderApiExtensions
             return order.OrderId;
         });
 
-        orders.MapGet("{orderId}", async (PizzaStoreContext db, int orderId) =>
+        orders.MapGet("{orderId}", static async (PizzaStoreContext db, int orderId) =>
         {
             var order = await db.Orders
                 .Where(o => o.OrderId == orderId)
@@ -58,7 +56,7 @@ public static class OrderApiExtensions
                 return Results.NotFound();
             }
 
-            return Results.Ok(OrderWithStatus.FromOrder(order));
+            return TypedResults.Ok(OrderWithStatus.FromOrder(order));
         });
 
         return builder;

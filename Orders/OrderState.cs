@@ -13,7 +13,7 @@ public class OrderState
             Special = special,
             SpecialId = special.Id,
             Size = Pizza.DefaultSize,
-            Toppings = new(),
+            Toppings = [],
         };
     }
 

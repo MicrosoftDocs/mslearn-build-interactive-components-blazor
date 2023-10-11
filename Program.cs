@@ -1,7 +1,3 @@
-using BlazingPizza;
-using BlazingPizza.Extensions;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
